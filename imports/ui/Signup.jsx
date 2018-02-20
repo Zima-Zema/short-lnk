@@ -1,27 +1,60 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
+import { Accounts } from 'meteor/accounts-base';
+import { Meteor } from "meteor/meteor";
+import createBrowserHistory from 'history/createBrowserHistory';
+const customHistory = createBrowserHistory({
+  forceRefresh:true
+});
+
+
 export default class Signup extends Component {
 
   constructor(props) {
     super(props);
+    if(Meteor.userId()){
+      customHistory.replace('/links');
+    }
+ 
     this.state = {
       error:0
     }
   }
+  componentWillMount(){
+
+}
   onSubmit(e){
     e.preventDefault();
-    this.setState({
-      error:"somthing went wrong."
+
+    let email = this.refs.email.value.trim();
+    let password = this.refs.password.value.trim();
+    if (password.length < 9) {
+      return this.setState({error:'Password must be more than 8 characters long'});
+    }
+    Accounts.createUser({email,password},(error)=>{
+      // console.log('signup Erroe', error);
+      if (error) {
+          this.setState({
+            error:error.reason
+          });
+      }
+      else{
+        this.setState({
+          error:''
+        });
+      }
     })
+
+
   }
   render() {
     return (
       <div>
         <h1>Create Account</h1>
         {this.state.error ? <p>{this.state.error}</p> : null}
-        <form onSubmit={this.onSubmit.bind(this)}>
-          <input type="email" name="email" id="txt-email" placeholder="Email"/>
-          <input type="password" name="password" id="txt-password" placeholder="Password"/>
+        <form onSubmit={this.onSubmit.bind(this)} noValidate>
+          <input type="email" ref="email" name="email" id="txt-email" placeholder="Email"/>
+          <input type="password" ref="password" name="password" id="txt-password" placeholder="Password"/>
           <button>Create Account</button>
         </form>
         <Link to="/">Already Have Account</Link>

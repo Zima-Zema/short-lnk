@@ -1,13 +1,70 @@
-import React, { Component } from "react";
-import { Link } from 'react-router-dom';
+import React, {Component} from "react";
+import {Link,Redirect} from 'react-router-dom';
+import {Meteor} from 'meteor/meteor'
+import createBrowserHistory from 'history/createBrowserHistory';
+const customHistory = createBrowserHistory({
+    forceRefresh:true
+});
 
-export default class Login extends Component{
-    render(){
+export default class Login extends Component {
+
+    constructor(props) {
+        super(props);
+        if(Meteor.userId()){
+            console.log("Oppa");
+            customHistory.replace('/links');
+        
+          }
+     
+        this.state = {
+            error: ''
+        }
+
+
+    }
+
+    onSubmit(e) {
+        e.preventDefault();
+        let email = this.refs.email.value.trim();
+        let password = this.refs.password.value.trim(); 
+        Meteor.loginWithPassword({email},password , (err) => {
+            if (err) {
+                console.log("login callback",err);
+                this.setState({error:'Unable to login. Check email and password.'});
+            }
+            else{
+                this.setState({error:''});
+            }
+        });
+    }
+    render() {
         return (
             <div>
                 <h1>Login To short lnk</h1>
                 <p>Login From here</p>
-                <Link to="/signup" >Have An Account</Link>
+                {this.state.error
+                    ? <p>{this.state.error}</p>
+                    : null}
+                <form
+                    onSubmit={this
+                    .onSubmit
+                    .bind(this)}
+                    noValidate>
+                    <input
+                        type="email"
+                        ref="email"
+                        name="email"
+                        id="txt-email"
+                        placeholder="Email"/>
+                    <input
+                        type="password"
+                        ref="password"
+                        name="password"
+                        id="txt-password"
+                        placeholder="Password"/>
+                    <button>Login</button>
+                </form>
+                <Link to="/signup">Have An Account</Link>
             </div>
         )
     }
