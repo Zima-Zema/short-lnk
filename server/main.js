@@ -15,7 +15,7 @@ Meteor.startup(() => {
   //   },
   //   contactNumber:{
   //     type:String,
-  //     optional:true,
+  //     optionagl:true,
   //     regEx:SimpleSchema.RegEx.Phone
   //   },
   //   email:{
