@@ -1,7 +1,7 @@
 import {Mongo} from 'meteor/mongo';
 import {Meteor} from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
-
+import shortId from 'shortid';
 export const Links = new Mongo.Collection('links');
 
 if (Meteor.isServer) {
@@ -24,7 +24,7 @@ Meteor.methods({
             }
         }).validate({url: url});
 
-        Links.insert({url, userId: this.userId});
+        Links.insert({_id:shortId.generate(),url, userId: this.userId,visible:true});
     },
     'links.getLink'(id){
         if (!id) {
