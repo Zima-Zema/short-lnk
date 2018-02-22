@@ -7,6 +7,7 @@ import createBrowserHistory from 'history/createBrowserHistory';
 import LinksList from './LinksList';
 import PrivateHeader from './PrivateHeader';
 import AddLink from './AddLink';
+import LinksListFilters from './LinksListFilters';
 
 const customHistory = createBrowserHistory({forceRefresh: true});
 
@@ -21,8 +22,10 @@ export default class Link extends Component {
         return (
             <div>
                 <PrivateHeader title="Your Links" />
-                <LinksList/>
+                <LinksListFilters />
                 <AddLink />
+                <LinksList/>
+                
             </div>
         )
     }

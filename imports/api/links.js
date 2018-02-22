@@ -24,13 +24,73 @@ Meteor.methods({
             }
         }).validate({url: url});
 
-        Links.insert({_id:shortId.generate(),url, userId: this.userId,visible:true});
+        Links.insert({
+            _id: shortId.generate(),
+            url,
+            userId: this.userId,
+            visible: true,
+            visitedCount: 0,
+            lastVisitedAt: null
+        });
     },
-    'links.getLink'(id){
+    'links.getLink' (id) {
         if (!id) {
             throw new Meteor.Error(400, "Bad Request");
         }
-        return Links.findOne({_id:id});
+        return Links.findOne({_id: id});
+    },
+    'links.setVisibility' (id, visibility) {
+        if (!this.userId) {
+            throw new Meteor.Error(401, "Access is denied due to invalid credentials.");
+        }
+        new SimpleSchema({
+            _id: {
+                type: String,
+                min: 1
+            },
+            visible: {
+                type: Boolean
+            }
+        }).validate({_id: id, visible: visibility});
+        return Links.update({
+            _id: id,
+            userId: this.userId
+        }, {
+            $set: {
+                visible: visibility
+            }
+        });
+    },
+    'links.trackVisit' (id) {
+        new SimpleSchema({
+            _id: {
+                type: String,
+                min: 1
+            }
+        }).validate({_id: id});
+        return Links.update({
+            _id: id
+        }, {
+            $inc: {
+                visitedCount: 1
+            },
+            $set:{
+                lastVisitedAt:new Date().getTime()
+            }
+        });
+    },
+    'links.delete'(id){
+        if (!this.userId) {
+            throw new Meteor.Error(401, "Access is denied due to invalid credentials.");
+        }
+        new SimpleSchema({
+            _id: {
+                type: String,
+                min: 1
+            }
+        }).validate({_id: id});
+
+        return Links.remove({_id:id,userId:this.userId});
     }
     //
 })

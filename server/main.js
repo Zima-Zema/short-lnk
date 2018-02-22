@@ -19,6 +19,15 @@ Meteor.startup(() => {
             //there is returned url
             res.statusCode = 302;
             res.setHeader('Location', result.url);
+            
+            Meteor.call('links.trackVisit',result._id,(err,response)=>{
+              if (err) {
+                console.log("The bloody error",err)
+              }
+              else{
+                console.log("the bloody res",response);
+              }
+            })
             res.end();
           } else {
             next();
