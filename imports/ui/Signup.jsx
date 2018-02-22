@@ -49,15 +49,17 @@ export default class Signup extends Component {
   }
   render() {
     return (
-      <div>
-        <h1>Create Account</h1>
-        {this.state.error ? <p>{this.state.error}</p> : null}
-        <form onSubmit={this.onSubmit.bind(this)} noValidate>
-          <input type="email" ref="email" name="email" id="txt-email" placeholder="Email"/>
-          <input type="password" ref="password" name="password" id="txt-password" placeholder="Password"/>
-          <button>Create Account</button>
-        </form>
-        <Link to="/">Already Have Account</Link>
+      <div className="boxed-view">
+        <div className="boxed-view__box">
+          <h1>Create Account</h1>
+          {this.state.error ? <p>{this.state.error}</p> : null}
+          <form onSubmit={this.onSubmit.bind(this)} noValidate>
+            <input type="email" ref="email" name="email" id="txt-email" placeholder="Email"/>
+            <input type="password" ref="password" name="password" id="txt-password" placeholder="Password"/>
+            <button>Create Account</button>
+          </form>
+          <Link to="/">Already Have Account</Link>
+        </div>
       </div>
     )
   }

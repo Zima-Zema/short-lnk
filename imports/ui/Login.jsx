@@ -39,32 +39,27 @@ export default class Login extends Component {
     }
     render() {
         return (
-            <div>
-                <h1>Login To short lnk</h1>
-                <p>Login From here</p>
-                {this.state.error
-                    ? <p>{this.state.error}</p>
-                    : null}
-                <form
-                    onSubmit={this
-                    .onSubmit
-                    .bind(this)}
-                    noValidate>
-                    <input
-                        type="email"
-                        ref="email"
-                        name="email"
-                        id="txt-email"
-                        placeholder="Email"/>
-                    <input
-                        type="password"
-                        ref="password"
-                        name="password"
-                        id="txt-password"
-                        placeholder="Password"/>
-                    <button>Login</button>
-                </form>
-                <Link to="/signup">Have An Account</Link>
+            <div className="boxed-view">
+                <div className="boxed-view__box">
+                    <h1>Short Lnk</h1>
+                    {this.state.error ? <p>{this.state.error}</p> : null}
+                    <form onSubmit={this.onSubmit.bind(this)} noValidate>
+                        <input
+                            type="email"
+                            ref="email"
+                            name="email"
+                            id="txt-email"
+                            placeholder="Email"/>
+                        <input
+                            type="password"
+                            ref="password"
+                            name="password"
+                            id="txt-password"
+                            placeholder="Password"/>
+                        <button>Login</button>
+                    </form>
+                    <Link to="/signup">Have An Account</Link>
+                </div>
             </div>
         )
     }
