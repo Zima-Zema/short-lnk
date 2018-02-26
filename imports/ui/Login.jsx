@@ -43,7 +43,7 @@ export default class Login extends Component {
                 <div className="boxed-view__box">
                     <h1>Short Lnk</h1>
                     {this.state.error ? <p>{this.state.error}</p> : null}
-                    <form onSubmit={this.onSubmit.bind(this)} noValidate>
+                    <form onSubmit={this.onSubmit.bind(this)} noValidate className="boxed-view__form">
                         <input
                             type="email"
                             ref="email"
@@ -56,7 +56,7 @@ export default class Login extends Component {
                             name="password"
                             id="txt-password"
                             placeholder="Password"/>
-                        <button>Login</button>
+                        <button className="button">Login</button>
                     </form>
                     <Link to="/signup">Have An Account</Link>
                 </div>

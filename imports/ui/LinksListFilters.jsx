@@ -26,14 +26,14 @@ export default class LinksListFilters extends Component {
     }
     render() {
         return (
-            <div>
+            <div className="checkbox">
                 <input
                     onChange={this.toggelCheckBox.bind(this)}
                     type="checkbox"
                     name="checkbox"
                     id="checkbox_id"
                     checked={!this.state.showVisible}/>
-                <label htmlFor="checkbox_id">show hidden links</label>
+                <label htmlFor="checkbox_id"></label>
             </div>
         );
     }

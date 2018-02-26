@@ -1,0 +1,59 @@
+// .checkbox{
+
+// }
+
+.checkbox {
+    width: 120px;
+	height: 40px;
+	background: $gray;
+	margin: 10px 0px;
+	border-radius: 50px;
+	position: relative;
+  }
+
+  .checkbox:before {
+	content: 'On';
+	position: absolute;
+	top: 12px;
+	left: 13px;
+	height: 2px;
+	color: $brand-primary;
+	font-size: 16px;
+}
+
+.checkbox:after {
+	content: 'Off';
+	position: absolute;
+	top: 12px;
+	left: 84px;
+	height: 2px;
+	color: #111;
+	font-size: 16px;
+}
+
+.checkbox label {
+	display: block;
+	width: 52px;
+	height: 22px;
+	border-radius: 50px;
+
+	transition: all .5s ease;
+	cursor: pointer;
+	position: absolute;
+	top: 9px;
+	z-index: 1;
+	left: 12px;
+	background: $brand-primary;
+}
+
+/**
+ * Create the checkbox event for the label
+ */
+.checkbox input[type=checkbox]:checked + label {
+    left: 60px;
+	background: $brand-primary;
+}
+
+input[type=checkbox]{
+    visibility: hidden;
+}

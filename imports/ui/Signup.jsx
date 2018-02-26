@@ -51,12 +51,12 @@ export default class Signup extends Component {
     return (
       <div className="boxed-view">
         <div className="boxed-view__box">
-          <h1>Create Account</h1>
+          <h1>Join Short Link</h1>
           {this.state.error ? <p>{this.state.error}</p> : null}
-          <form onSubmit={this.onSubmit.bind(this)} noValidate>
+          <form onSubmit={this.onSubmit.bind(this)} noValidate className="boxed-view__form">
             <input type="email" ref="email" name="email" id="txt-email" placeholder="Email"/>
             <input type="password" ref="password" name="password" id="txt-password" placeholder="Password"/>
-            <button>Create Account</button>
+            <button className="button">Create Account</button>
           </form>
           <Link to="/">Already Have Account</Link>
         </div>

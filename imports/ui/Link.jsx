@@ -21,11 +21,12 @@ export default class Link extends Component {
     render() {
         return (
             <div>
-                <PrivateHeader title="Your Links" />
-                <LinksListFilters />
-                <AddLink />
-                <LinksList/>
-                
+                <PrivateHeader title="Short Lnk" />
+                <div className="wrapper">
+                    <LinksListFilters />
+                    <AddLink />
+                    <LinksList/>
+                </div>
             </div>
         )
     }
