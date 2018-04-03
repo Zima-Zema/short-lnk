@@ -13,20 +13,20 @@ export default class LinksListItem extends Component{
     setVisibility(){
         Meteor.call('links.setVisibility',this.props._id,!this.props.visible,(err,res)=>{
             if (err) {
-                console.log(err);
+                // console.log(err);
             }
             else{
-                console.log("updated",res);
+                // console.log("updated",res);
             }
         })
     }
     deleteLink(){
         Meteor.call('links.delete',this.props._id,(err,res)=>{
             if (err) {
-                console.log(err);
+                // console.log(err);
             }
             else{
-                console.log("delete res", res);
+                // console.log("delete res", res);
             }
         })
     }
